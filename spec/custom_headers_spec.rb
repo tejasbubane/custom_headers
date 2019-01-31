@@ -1,7 +1,9 @@
 require "yaml"
 
 describe Rack::CustomHeaders do
-  let(:app) { lambda { |env| [200, {}, [env.to_yaml]] } }
+  let(:app) do
+    ->(env) { [200, {}, [env.to_yaml]] }
+  end
   let(:header_options) do
     {
       "X-Trace-ID" => -> { "abcd" },
